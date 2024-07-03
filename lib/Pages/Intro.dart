@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jutta/Pages/Homepage.dart';
+import 'package:jutta/Pages/shoppage.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -47,26 +49,28 @@ class _IntroPageState extends State<IntroPage> {
   height: 60,
   width: 300,
   child: ElevatedButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    },
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          return Colors.white; // Background color when hovered
+          return Colors.white60; 
         }
-        return Colors.black; // Default background color
+        return Colors.black; 
       }),
       foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          return Colors.black; // Text color when hovered
+          return Colors.black54; 
         }
-        return Colors.white; // Default text color
+        return Colors.white; 
       }),
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      animationDuration: Duration(milliseconds: 300), // Animation duration
+      animationDuration: Duration(seconds: 1), 
     ),
     child: Text(
       "Shop Now",
