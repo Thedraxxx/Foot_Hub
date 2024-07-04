@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jutta/Pages/Homepage.dart';
-import 'package:jutta/Pages/shoppage.dart';
+
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
