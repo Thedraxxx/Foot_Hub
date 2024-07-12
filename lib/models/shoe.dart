@@ -1,7 +1,7 @@
 class Shoe {
   final String name;
   final String imagepath;
-  final int price;
+  final String price;
   final String discription;
 
   Shoe(

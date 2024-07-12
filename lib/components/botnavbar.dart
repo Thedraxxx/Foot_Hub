@@ -18,7 +18,7 @@ class Botnavbar extends StatelessWidget {
           tabBorderRadius: 20,
           mainAxisAlignment: MainAxisAlignment.center,
           onTabChange: (value)=> onTabChange!(value),
-          padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 30,vertical: 15),
           tabs: [
       GButton(
         icon: Icons.home,

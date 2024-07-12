@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jutta/components/shoe_tile.dart';
+import 'package:jutta/models/cart.dart';
 import 'package:jutta/models/shoe.dart';
+import 'package:provider/provider.dart';
 
 class Shoppage extends StatefulWidget {
   const Shoppage({super.key});
@@ -10,43 +12,48 @@ class Shoppage extends StatefulWidget {
 }
 
 class _ShoppageState extends State<Shoppage> {
+  void addShoeToCart(Shoe shoe){
+    Provider.of<Cart>(context, listen: false).addItem(shoe);
+   //alert the msg
+   showDialog(context: context,
+    builder: (context)=> AlertDialog(
+    title: Text("successfully added!"),
+    content: Text('check your cart'),
+   ));
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: Column(
+    return Consumer<Cart>(
+      builder: (context, value, child) => Column(
         children: [
-          //searchbar
-          SizedBox(
-            height: 20,
-          ),
+          // searchbar
+          const SizedBox(height: 20),
           Center(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
+              margin: const EdgeInsets.symmetric(horizontal: 25),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 15),
                 child: TextField(
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "search",
-                      suffixIcon: Icon(
-                        Icons.search,
-                        size: 25,
-                        color: Colors.grey,
-                      )),
+                    border: InputBorder.none,
+                    hintText: "search",
+                    suffixIcon: Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Colors.grey,
+                    ),
+                  ),
                   style: TextStyle(color: Colors.grey, fontSize: 18),
                 ),
               ),
             ),
           ),
-          //hot deals
-          SizedBox(
-            height: 20,
-          ),
+          // hot deals
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -55,9 +62,10 @@ class _ShoppageState extends State<Shoppage> {
                 Text(
                   'Hot Picks \u{1F525}',
                   style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade700),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey.shade700,
+                  ),
                 ),
                 Text(
                   "See All",
@@ -66,22 +74,25 @@ class _ShoppageState extends State<Shoppage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Column(
-            children: [
-              ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  Shoe shoe = Shoe(name: "Air jorden", price: 250, discription: 'cool wear', imagepath: 'assets/images/J1.png');
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                Shoe shoe = value.getShoeList()[index];
                 return ShoeTile(
                   shoe: shoe,
+                  onTap: ()=> addShoeToCart(shoe),
                 );
-              })
-            ],
+              },
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 40),
+            child: Divider(color: Colors.white),
           )
-          //sneaker picks
+          // sneaker picks
         ],
       ),
     );

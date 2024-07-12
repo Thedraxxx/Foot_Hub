@@ -107,10 +107,15 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: Botnavbar(
-        onTabChange: (index) => navigatebottombar(index),
-      ),
+    
       body: _pages[_Selectedindex],
+        
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Botnavbar(
+          onTabChange: (index) => navigatebottombar(index),
+                ),
+        ),
     );
   }
 }
